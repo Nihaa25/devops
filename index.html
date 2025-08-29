@@ -1,66 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Movie Ticket Booking</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎟 Ticket Booking System</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
     }
 
     .container {
-      width: 400px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
     }
 
-    h2 {
-      text-align: center;
+    h1 {
       margin-bottom: 20px;
       color: #333;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      color: #555;
+      margin: 10px 0 5px;
+      font-weight: bold;
     }
 
-    select, input[type="text"], input[type="number"] {
+    select, input, button {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 6px;
       border: 1px solid #ccc;
-      border-radius: 5px;
     }
 
     button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #27ae60;
-      border: none;
+      background: #28a745;
       color: white;
       font-size: 16px;
-      border-radius: 5px;
       cursor: pointer;
+      border: none;
     }
 
     button:hover {
-      background-color: #219150;
+      background: #218838;
+    }
+
+    #output {
+      margin-top: 15px;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #f0f0f0;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <h2>Movie Ticket Booking</h2>
+    <h1>🎬 Online Ticket Booking</h1>
     
-    <form
+    <label for="movie">Select Movie:</label>
+    <select id="movie">
+      <option value="150">Pushpa 2 (Rs.150)</option>
+      <option value="180">Devara (Rs.180)</option>
+      <option value="200">Game Changer (Rs.200)</option>
+    </select>
+    
+    <label for="tickets">Number of Tickets:</label>
+    <input type="number" id="tickets" min="1" value="1">
+    
+    <button onclick="bookTicket()">Book Now</button>
+    
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function bookTicket() {
+      const movieSelect = document.getElementById("movie");
+      const ticketCount = document.getElementById("tickets").value;
+      const price = movieSelect.value;
+      const movieName = movieSelect.options[movieSelect.selectedIndex].text;
+      const total = price * ticketCount;
+
+      let output = "";
+
+      if (ticketCount <= 0) {
+        output = "❌ Please enter a valid number of tickets.";
+      } else {
+        output = `
+          ✅ Booking Confirmed! <br><br>
+          🎥 Movie: <b>${movieName}</b><br>
+          🎟 Tickets: <b>${ticketCount}</b><br>
+          💰 Total Paid: <b>Rs.${total}</b><br>
+          🍿 Enjoy your show!
+        `;
+      }
+
+      document.getElementById("output").innerHTML = output;
+    }
+  </script>
+</body>
+</html>
